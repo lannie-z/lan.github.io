@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>像素世界 | 个人网站</title>
+    <!-- 外部CSS依赖 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=Silkscreen&display=swap" rel="stylesheet">
+    <!-- 内联CSS样式 -->
+    <style>
+/* 像素风格个人网站样式表 */
+
+/* 基础重置与变量定义 */
+:root {
+    /* 色彩方案 - 像素风格 */
+    --pixel-primary: #6C5CE7;
+    --pixel-secondary: #00CEC9;
+    --pixel-accent: #FF7675;
+    --pixel-dark: #2D3436;
+    --pixel-light: #F9F9F9;
+    --pixel-gray: #636E72;
+    --pixel-border: #2D3436;
+
+    /* 字体 */
+    --font-pixel: 'Press Start 2P', 'Silkscreen', 'DotGothic16', cursive;
+    --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    /* 间距 */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+    /* 边框 */
+    --border-width: 4px;
+    --border-radius: 0;
+
+    /* 阴影 */
+    --shadow-pixel: 8px 8px 0px var(--pixel-border);
+    --shadow-pixel-small: 4px 4px 0px var(--pixel-border);
+    --shadow-pixel-inset: inset 4px 4px 0px var(--pixel-border);
+
+    /* 动画 */
+    --transition-fast: 0.1s;
+    --transition-normal: 0.2s;
+    --transition-slow: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--pixel-light);
+    color: var(--pixel-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 像素背景 */
+.pixel-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(var(--pixel-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--pixel-border) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.05;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 像素标题 */
+.pixel-title {
+    font-family: var(--font-pixel);
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+.pixel-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--pixel-accent);
+}
+
+.pixel-subtitle {
+    font-family: var(--font-pixel);
+    font-size: 1rem;
+    color: var(--pixel-gray);
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-subtitle {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+    color: var(--pixel-gray);
+}
+
+/* 像素按钮 */
+.pixel-button {
+    font-family: var(--font-pixel);
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: var(--border-width) solid var(--pixel-border);
+    background-color: var(--pixel-light);
+    color: var(--pixel-dark);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-pixel-small);
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pixel-button:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--pixel-border);
+}
+
+.pixel-button:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--pixel-border);
+}
+
+.pixel-button.primary {
+    background-color: var(--pixel-primary);
+    color: white;
+}
+
+.pixel-button.secondary {
+    background-color: var(--pixel-secondary);
+    color: white;
+}
+
+/* 导航栏 */
+.pixel-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--pixel-light);
+    border-bottom: var(--border-width) solid var(--pixel-border);
+    z-index: 1000;
+    padding: var(--spacing-sm) 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.pixel-logo {
+    font-size: 2rem;
+}
+
+.logo-text {
+    font-family: var(--font-pixel);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-menu {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--pixel-dark);
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    padding: var(--spacing-xs) var(--spacing-md);
+}
+
+.nav-link:hover {
+    background-color: var(--pixel-primary);
+    color: white;
+}
+
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    padding: var(--spacing-xs) var(--spacing-md);
+}
+
+/* 主要内容容器 */
+.pixel-container {
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding: 0 var(--spacing-lg);
+}
+
+/* 首页横幅 */
+.hero-section {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-xxl) 0;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.pixel-avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    background-color: var(--pixel-secondary);
+    border: var(--border-width) solid var(--pixel-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    box-shadow: var(--shadow-pixel);
+    overflow: hidden;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-border {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 100%;
+    height: 100%;
+    border: var(--border-width) solid var(--pixel-border);
+    z-index: -1;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    margin-top: var(--spacing-xl);
+}
+
+.highlight {
+    color: var(--pixel-accent);
+    text-shadow: 2px 2px 0px var(--pixel-border);
+}
+
+.pixel-title .chinese-text {
+    font-family: 'SimHei', 'Microsoft YaHei', '黑体', sans-serif;
+    text-transform: none;
+}
+
+/* 关于我 */
+.about-section {
+    padding: var(--spacing-xxl) 0;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xxl);
+    margin-top: var(--spacing-xl);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border: var(--border-width) solid var(--pixel-border);
+    background-color: white;
+    box-shadow: var(--shadow-pixel-small);
+}
+
+.info-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.about-skills {
+    margin-top: var(--spacing-xl);
+}
+
+
+/* 爱好 */
+.hobbies-section {
+    padding: var(--spacing-xxl) 0;
+    background-color: rgba(108, 92, 231, 0.05);
+}
+
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.hobby-card {
+    padding: var(--spacing-xl);
+    border: var(--border-width) solid var(--pixel-border);
+    background-color: white;
+    box-shadow: var(--shadow-pixel);
+    transition: all var(--transition-normal);
+}
+
+.hobby-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0px var(--pixel-border);
+}
+
+.hobby-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.hobby-image {
+    margin-bottom: var(--spacing-md);
+}
+
+.hobby-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: var(--border-width) solid var(--pixel-border);
+    box-shadow: var(--shadow-pixel-small);
+}
+
+.hobby-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+}
+
+/* 美食日记 */
+.food-section {
+    padding: var(--spacing-xxl) 0;
+}
+
+.food-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.filter-btn.active {
+    background-color: var(--pixel-primary);
+    color: white;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xxl);
+}
+
+.food-card {
+    border: var(--border-width) solid var(--pixel-border);
+    background-color: white;
+    box-shadow: var(--shadow-pixel);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.food-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0px var(--pixel-border);
+}
+
+.food-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--pixel-light);
+    border-bottom: var(--border-width) solid var(--pixel-border);
+}
+
+.food-image {
+    height: 200px;
+    background-color: var(--pixel-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    border-bottom: var(--border-width) solid var(--pixel-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.food-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.food-content {
+    padding: var(--spacing-lg);
+}
+
+.food-location {
+    color: var(--pixel-gray);
+    font-size: 0.9rem;
+    margin: var(--spacing-xs) 0 var(--spacing-md);
+}
+
+.food-description {
+    margin-bottom: var(--spacing-md);
+}
+
+.food-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.section-footer {
+    text-align: center;
+    margin-top: var(--spacing-xxl);
+}
+
+/* 社交链接 */
+.contact-section {
+    padding: var(--spacing-xxl) 0;
+    background-color: rgba(0, 206, 201, 0.05);
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.social-card {
+    text-decoration: none;
+    color: inherit;
+    padding: var(--spacing-xl);
+    border: var(--border-width) solid var(--pixel-border);
+    background-color: white;
+    box-shadow: var(--shadow-pixel);
+    text-align: center;
+    transition: all var(--transition-normal);
+}
+
+.social-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0px var(--pixel-border);
+    background-color: var(--pixel-primary);
+    color: white;
+}
+
+.social-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+/* 页脚 */
+.pixel-footer {
+    border-top: var(--border-width) solid var(--pixel-border);
+    background-color: var(--pixel-dark);
+    color: white;
+    padding: var(--spacing-xxl) 0;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.footer-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-text {
+    margin-bottom: var(--spacing-lg);
+    font-family: var(--font-pixel);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    margin-bottom: var(--spacing-lg);
+}
+
+.footer-links a {
+    color: var(--pixel-secondary);
+    text-decoration: none;
+    margin: 0 var(--spacing-sm);
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: var(--pixel-gray);
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    width: 50px;
+    height: 50px;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 像素标签 */
+.pixel-tag {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 2px solid var(--pixel-border);
+    background-color: var(--pixel-light);
+    font-family: var(--font-pixel);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pixel-tag.small {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+}
+
+/* 滚动指示器 */
+.pixel-scroll-indicator {
+    position: absolute;
+    bottom: var(--spacing-xl);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scroll-dots {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--pixel-border);
+    animation: bounce 1.5s infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .pixel-title {
+        font-size: 1.8rem;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hobbies-grid,
+    .food-grid,
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hobby-image img {
+        height: 150px;
+    }
+
+    .food-image img {
+        height: 150px;
+    }
+
+    .food-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: var(--spacing-sm);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pixel-container {
+        margin-top: 60px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .pixel-title {
+        font-size: 1.5rem;
+    }
+
+    .pixel-button {
+        font-size: 0.8rem;
+        padding: var(--spacing-xs) var(--spacing-md);
+    }
+
+    .nav-container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .hero-section {
+        min-height: 80vh;
+    }
+}
+
+/* 像素图标 */
+.pixel-icon {
+    font-family: var(--font-pixel);
+    font-size: 1.5rem;
+}
+
+/* 像素图像 */
+.pixel-image {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+    </style>
+</head>
+<body>
+    <!-- 像素风格背景 -->
+    <div class="pixel-background"></div>
+
+    <!-- 导航栏 -->
+    <nav class="pixel-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="pixel-logo">🧑‍💻</span>
+                <span class="logo-text">像素世界</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link pixel-button">首页</a>
+                <a href="#about" class="nav-link pixel-button">关于我</a>
+                <a href="#hobbies" class="nav-link pixel-button">爱好</a>
+                <a href="#food-diary" class="nav-link pixel-button">美食日记</a>
+                <a href="#contact" class="nav-link pixel-button">联系</a>
+            </div>
+            <button class="mobile-menu-btn pixel-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
+    <main class="pixel-container">
+        <!-- 首页横幅 -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="pixel-avatar">
+                    <div class="avatar-image">
+                        <img src="images/renxiang.jpeg" alt="LAN的头像" class="avatar-img">
+                    </div>
+                    <div class="avatar-border"></div>
+                </div>
+                <h1 class="pixel-title"><span class="chinese-text">你好，我是</span><span class="highlight">LAN</span></h1>
+                <p class="pixel-subtitle">欢迎来到我的像素世界！这里记录了我的生活、爱好和美食探索之旅。</p>
+                <div class="hero-buttons">
+                    <a href="#about" class="pixel-button primary">探索我的世界</a>
+                    <a href="#food-diary" class="pixel-button secondary">查看美食日记</a>
+                </div>
+            </div>
+            <div class="pixel-scroll-indicator">
+                <div class="scroll-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我 -->
+        <section id="about" class="section about-section">
+            <h2 class="section-title pixel-title">关于我</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>基本介绍</h3>
+                    <p>我是一个热爱生活、喜欢探索的新时代千玺后。喜欢追星、旅行和排球，同时也热爱美食探索和各种美好的事物。</p>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-icon">📍</span>
+                            <div class="info-content">
+                                <strong>地点</strong>
+                                <p>中国</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">🧩</span>
+                            <div class="info-content">
+                                <strong>MBTI</strong>
+                                <p>ENFJ</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">✨</span>
+                            <div class="info-content">
+                                <strong>星座</strong>
+                                <p>双子座</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">❤️</span>
+                            <div class="info-content">
+                                <strong>座右铭</strong>
+                                <p>我们存在于一生仅一次的当下</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 爱好 -->
+        <section id="hobbies" class="section hobbies-section">
+            <h2 class="section-title pixel-title">我的爱好</h2>
+            <p class="section-subtitle">生活因多样而精彩，这些是我热爱的活动</p>
+
+            <div class="hobbies-grid">
+                <div class="hobby-card">
+                    <div class="hobby-icon pixel-icon">🌟</div>
+                    <div class="hobby-image">
+                        <img src="images/star.jpg" alt="追星照片" class="pixel-image">
+                    </div>
+                    <h3>追星</h3>
+                    <p>特别喜欢韩国组合SEVENTEEN，欣赏他们的音乐才华和团队精神。</p>
+                    <div class="hobby-tags">
+                        <span class="pixel-tag small">SEVENTEEN</span>
+                        <span class="pixel-tag small">K-POP</span>
+                        <span class="pixel-tag small">音乐</span>
+                    </div>
+                </div>
+
+                <div class="hobby-card">
+                    <div class="hobby-icon pixel-icon">✈️</div>
+                    <div class="hobby-image">
+                        <img src="images/travel.jpg" alt="旅行照片" class="pixel-image">
+                    </div>
+                    <h3>旅行</h3>
+                    <p>喜欢探索不同的城市和文化，用脚步丈量世界的美好。</p>
+                    <div class="hobby-tags">
+                        <span class="pixel-tag small">城市探索</span>
+                        <span class="pixel-tag small">文化体验</span>
+                        <span class="pixel-tag small">摄影记录</span>
+                    </div>
+                </div>
+
+                <div class="hobby-card">
+                    <div class="hobby-icon pixel-icon">🏐</div>
+                    <div class="hobby-image">
+                        <img src="images/volleyball.jpg" alt="排球照片" class="pixel-image">
+                    </div>
+                    <h3>排球</h3>
+                    <p>享受团队运动的乐趣，喜欢排球带来的激情与协作。</p>
+                    <div class="hobby-tags">
+                        <span class="pixel-tag small">团队运动</span>
+                        <span class="pixel-tag small">体育</span>
+                        <span class="pixel-tag small">健身</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 美食日记 -->
+        <section id="food-diary" class="section food-section">
+            <h2 class="section-title pixel-title">美食探访日记</h2>
+            <p class="section-subtitle">记录每一次味蕾的冒险，分享美食的快乐</p>
+            <div class="food-filters">
+                <button class="pixel-button filter-btn active">全部</button>
+                <button class="pixel-button filter-btn">中餐</button>
+                <button class="pixel-button filter-btn">西餐</button>
+                <button class="pixel-button filter-btn">日料</button>
+                <button class="pixel-button filter-btn">甜点</button>
+                <button class="pixel-button filter-btn">高评分</button>
+            </div>
+
+            <div class="food-grid">
+                <div class="food-card">
+                    <div class="food-header">
+                        <span class="food-date">2026-03-25</span>
+                        <span class="food-rating">★★★★☆</span>
+                    </div>
+                    <div class="food-image pixel-image">
+                        <img src="images/food1.jpg" alt="Brut Eatery" class="pixel-image">
+                    </div>
+                    <div class="food-content">
+                        <h3>Brut Eatery</h3>
+                        <p class="food-location">📍 西餐 · Brunch餐厅</p>
+                        <p class="food-description">一家主打Brunch的餐厅，拌饭酱汁做的非常浓郁，开心果巴斯克口感丝滑绵密。</p>
+                        <div class="food-tags">
+                            <span class="pixel-tag small">西餐</span>
+                            <span class="pixel-tag small">Brunch</span>
+                            <span class="pixel-tag small">甜品</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="food-card">
+                    <div class="food-header">
+                        <span class="food-date">2026-03-20</span>
+                        <span class="food-rating">★★★★☆</span>
+                    </div>
+                    <div class="food-image pixel-image">
+                        <img src="images/food2.jpg" alt="博多天一天妇罗" class="pixel-image">
+                    </div>
+                    <div class="food-content">
+                        <h3>博多天一天妇罗</h3>
+                        <p class="food-location">📍 日料 · 天妇罗专门店</p>
+                        <p class="food-description">鹅肝入口即化，肥牛上的酱汁非常浓郁，天妇罗外酥里嫩。</p>
+                        <div class="food-tags">
+                            <span class="pixel-tag small">日料</span>
+                            <span class="pixel-tag small">天妇罗</span>
+                            <span class="pixel-tag small">鹅肝</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="food-card">
+                    <div class="food-header">
+                        <span class="food-date">2026-03-15</span>
+                        <span class="food-rating">★★★★★</span>
+                    </div>
+                    <div class="food-image pixel-image">
+                        <img src="images/food3.jpg" alt="18号酒馆" class="pixel-image">
+                    </div>
+                    <div class="food-content">
+                        <h3>18号酒馆</h3>
+                        <p class="food-location">📍 西餐 · 酒吧餐厅</p>
+                        <p class="food-description">沙拉口感较为清爽，爆浆金枪鱼芝士披萨口感扎实，氛围轻松愉快。</p>
+                        <div class="food-tags">
+                            <span class="pixel-tag small">西餐</span>
+                            <span class="pixel-tag small">酒吧</span>
+                            <span class="pixel-tag small">披萨</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-footer">
+                <a href="#" class="pixel-button">查看所有日记 →</a>
+            </div>
+        </section>
+
+        <!-- 社交链接 -->
+        <section id="contact" class="section contact-section">
+            <h2 class="section-title pixel-title">找到我</h2>
+            <p class="section-subtitle">在这些平台关注我的动态</p>
+
+            <div class="social-grid">
+                <a href="https://xhslink.com/m/2qFd9iFpVPX" target="_blank" class="social-card">
+                    <div class="social-icon pixel-icon">
+                        📖
+                    </div>
+                    <h3>小红书</h3>
+                    <p>生活分享与记录</p>
+                </a>
+
+
+
+
+                <a href="https://weibo.com" target="_blank" class="social-card">
+                    <div class="social-icon pixel-icon">
+                        <i class="fab fa-weibo"></i>
+                    </div>
+                    <h3>微博</h3>
+                    <p>中文内容分享</p>
+                </a>
+
+                <a href="mailto:example@example.com" class="social-card">
+                    <div class="social-icon pixel-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>邮箱</h3>
+                    <p>联系合作</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="pixel-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="pixel-logo">🧑‍💻</span>
+                <span class="logo-text">像素世界</span>
+            </div>
+            <p class="footer-text">用像素记录生活，用代码创造可能</p>
+            <div class="footer-links">
+                <a href="#home">首页</a> ·
+                <a href="#about">关于</a> ·
+                <a href="#hobbies">爱好</a> ·
+                <a href="#food-diary">美食日记</a> ·
+                <a href="#contact">联系</a>
+            </div>
+            <p class="copyright">© 2026 LAN. 保留所有权利. 设计为像素风格.</p>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top pixel-button">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- 内联JavaScript代码 -->
+    <script>
+// 像素风格个人网站交互脚本
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 移动端菜单切换
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+
+            // 如果是移动端，调整菜单样式
+            if (window.innerWidth <= 768) {
+                if (navMenu.style.display === 'flex') {
+                    navMenu.style.flexDirection = 'column';
+                    navMenu.style.position = 'absolute';
+                    navMenu.style.top = '100%';
+                    navMenu.style.left = '0';
+                    navMenu.style.width = '100%';
+                    navMenu.style.backgroundColor = 'var(--pixel-light)';
+                    navMenu.style.borderTop = 'var(--border-width) solid var(--pixel-border)';
+                    navMenu.style.borderBottom = 'var(--border-width) solid var(--pixel-border)';
+                    navMenu.style.padding = 'var(--spacing-md)';
+                    navMenu.style.gap = 'var(--spacing-md)';
+                    navMenu.style.zIndex = '1000';
+                }
+            }
+        });
+    }
+
+    // 窗口大小改变时重置菜单
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            navMenu.style.display = 'flex';
+            navMenu.style.flexDirection = 'row';
+            navMenu.style.position = 'static';
+            navMenu.style.backgroundColor = 'transparent';
+            navMenu.style.border = 'none';
+            navMenu.style.padding = '0';
+        } else {
+            navMenu.style.display = 'none';
+        }
+    });
+
+    // 返回顶部按钮
+    const backToTopBtn = document.querySelector('.back-to-top');
+
+    if (backToTopBtn) {
+        // 滚动显示/隐藏按钮
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        // 点击返回顶部
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // 美食日记过滤功能
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const foodCards = document.querySelectorAll('.food-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // 移除所有按钮的active类
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // 给当前点击的按钮添加active类
+            this.classList.add('active');
+
+            const filterValue = this.textContent.trim();
+
+            // 过滤卡片
+            foodCards.forEach(card => {
+                if (filterValue === '全部') {
+                    card.style.display = 'block';
+                } else {
+                    const tags = card.querySelectorAll('.pixel-tag');
+                    let hasTag = false;
+
+                    tags.forEach(tag => {
+                        if (tag.textContent.includes(filterValue)) {
+                            hasTag = true;
+                        }
+                    });
+
+                    if (hasTag) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+
+                // 添加显示动画
+                if (card.style.display === 'block') {
+                    card.style.animation = 'fadeIn 0.5s ease';
+                }
+            });
+        });
+    });
+
+    // 导航链接点击效果
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // 如果是移动端，点击后关闭菜单
+            if (window.innerWidth <= 768) {
+                navMenu.style.display = 'none';
+            }
+
+            // 移除所有链接的active状态
+            navLinks.forEach(l => l.classList.remove('active'));
+            // 添加当前链接的active状态
+            this.classList.add('active');
+        });
+    });
+
+    // 像素按钮点击效果增强
+    const pixelButtons = document.querySelectorAll('.pixel-button');
+
+    pixelButtons.forEach(button => {
+        button.addEventListener('mousedown', function() {
+            this.style.transform = 'translate(4px, 4px)';
+            this.style.boxShadow = '0px 0px 0px var(--pixel-border)';
+        });
+
+        button.addEventListener('mouseup', function() {
+            this.style.transform = 'translate(2px, 2px)';
+            this.style.boxShadow = '2px 2px 0px var(--pixel-border)';
+        });
+
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translate(0, 0)';
+            this.style.boxShadow = '4px 4px 0px var(--pixel-border)';
+        });
+    });
+
+    // 卡片悬停效果
+    const cards = document.querySelectorAll('.hobby-card, .food-card, .social-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.zIndex = '10';
+        });
+
+        card.addEventListener('mouseleave', function() {
+            this.style.zIndex = '1';
+        });
+    });
+
+    // 滚动时激活对应导航链接
+    const sections = document.querySelectorAll('section');
+
+    function highlightNavLink() {
+        let scrollPos = window.pageYOffset + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightNavLink);
+
+    // 添加CSS动画
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hobby-card, .food-card, .social-card {
+            animation: fadeIn 0.8s ease;
+        }
+
+        .hobby-card:nth-child(2) { animation-delay: 0.1s; }
+        .hobby-card:nth-child(3) { animation-delay: 0.2s; }
+        .hobby-card:nth-child(4) { animation-delay: 0.3s; }
+        .hobby-card:nth-child(5) { animation-delay: 0.4s; }
+        .hobby-card:nth-child(6) { animation-delay: 0.5s; }
+
+        .food-card:nth-child(2) { animation-delay: 0.1s; }
+        .food-card:nth-child(3) { animation-delay: 0.2s; }
+        .food-card:nth-child(4) { animation-delay: 0.3s; }
+
+        .social-card:nth-child(2) { animation-delay: 0.1s; }
+        .social-card:nth-child(3) { animation-delay: 0.2s; }
+        .social-card:nth-child(4) { animation-delay: 0.3s; }
+        .social-card:nth-child(5) { animation-delay: 0.4s; }
+        .social-card:nth-child(6) { animation-delay: 0.5s; }
+    `;
+    document.head.appendChild(style);
+
+    // 初始化：检查窗口大小设置菜单状态
+    if (window.innerWidth <= 768) {
+        navMenu.style.display = 'none';
+    }
+
+    console.log('像素网站加载完成！欢迎来到像素世界！');
+});
+    </script>
+</body>
+</html>
